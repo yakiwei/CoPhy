@@ -26,6 +26,21 @@ Chemical Engine: Manages complex aqueous speciation and mineral kinetics (PHREEQ
 
 Interface Layer: Python-based automation that synchronizes time-stepping and data mapping.
 
+📂 Project Structure (Required for Reproducibility)
+To ensure the scripts can locate files using relative paths, please organize your local directory as follows:
+
+Plaintext
+CPqPy_V2_Project/
+├── main_1.py              # Initialization runner (Calls comsol_1 & phreeqc_1)
+├── comsol_1.py            # Physics initialization script
+├── phreeqc_1.py           # Chemical equilibrium initialization script
+├── models/                # Directory for COMSOL models
+│   └── Case1_first.mph    # Initialization .mph file
+├── database/              # Directory for PHREEQC databases
+│   └── phreeqc.dat        # PHREEQC database file
+├── Results/               # Directory for automated data exchange (txt/csv)
+└── README.md
+
 📋 Prerequisites
 To run CPqPy_V2, you will need:
 
@@ -38,5 +53,23 @@ CPU: 4 cores or more.
 Operating System: Windows 10/11 (required for COMSOL-Python MPH interface).
 
 Required Python packages: numpy, os, sys, shutil, time, Mph (for COMSOL-Python bridging), phreeqc(for Phreeqc-Python bridging)
+
+
+Python Dependencies:
+
+Bash
+pip install numpy mph phreeqpy
+🏁 Quick Start: Runnable Example (Single-Step)
+This repository includes a pre-configured test case to verify your environment. The scripts use relative paths and will automatically redirect COMSOL's export path to the local /Results folder.
+
+Start COMSOL Server: Open the "COMSOL Multiphysics Server" application on your computer.
+
+Prepare Files: Ensure Case1_first.mph is in the models/ folder and phreeqc.dat is in the database/ folder.
+
+Run the Test:
+
+Bash
+python main_1.py
+Verification: Upon completion (~2 minutes), check the Results/ folder. You should see outcon.txt and infile.txt. Compare these with any provided expected results to confirm success.
 
 Proposed by Yaqiang Wei, Jiao Zhang in 2026 Contact: yakiwei@yahoo.com
